@@ -2,9 +2,14 @@ package didimu.kr.co.sampleapp;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.WebResourceRequest;
@@ -18,6 +23,11 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private WebView webView = null;
+
+    private FragmentManager fragmentManager = getSupportFragmentManager();
+    private FragmentSearch fragmentSearch = new FragmentSearch();
+    private FragmentCamera fragmentCamera = new FragmentCamera();
+    private FragmentCall fragmentCall = new FragmentCall();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
 
         webView.loadUrl("http://ulotto.didimu.co.kr");
 
+
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.frameLayout, fragmentSearch).commitAllowingStateLoss();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
 
     }
 
@@ -76,7 +92,27 @@ public class MainActivity extends AppCompatActivity {
         //}
     }
 
+    class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener{
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
 
+            switch(menuItem.getItemId())
+            {
+                case R.id.searchItem:
+                    transaction.replace(R.id.frameLayout, fragmentSearch).commitAllowingStateLoss();
+
+                    break;
+                case R.id.cameraItem:
+                    transaction.replace(R.id.frameLayout, fragmentCamera).commitAllowingStateLoss();
+                    break;
+                case R.id.callItem:
+                    transaction.replace(R.id.frameLayout, fragmentCall).commitAllowingStateLoss();
+                    break;
+            }
+            return true;
+        }
+    }
 
 
 
