@@ -22,19 +22,20 @@ import android.widget.Toast;
 //public class MainActivity extends AppCompatActivity {
 public class MainActivity extends AppCompatActivity {
 
-    private WebView webView = null;
+    //private WebView webView = null;
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private FragmentSearch fragmentSearch = new FragmentSearch();
     private FragmentCamera fragmentCamera = new FragmentCamera();
     private FragmentCall fragmentCall = new FragmentCall();
+    private FragmentWebView fragmentWebView = new FragmentWebView();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-
+/*
         //웹뷰 설정
         webView = (WebView)findViewById(R.id.webview);
 
@@ -48,16 +49,16 @@ public class MainActivity extends AppCompatActivity {
         webView.setWebViewClient(webViewClient);
 
         webView.loadUrl("http://ulotto.didimu.co.kr");
-
+*/
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frameLayout, fragmentSearch).commitAllowingStateLoss();
+        transaction.replace(R.id.frameLayout, fragmentWebView).commitAllowingStateLoss();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
 
     }
-
+/*
     private class MyWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         //this.webView.goBack();
         //}
     }
-
+*/
     class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener{
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -99,6 +100,10 @@ public class MainActivity extends AppCompatActivity {
 
             switch(menuItem.getItemId())
             {
+                case R.id.webviewItem:
+                    transaction.replace(R.id.frameLayout, fragmentWebView).commitAllowingStateLoss();
+
+                    break;
                 case R.id.searchItem:
                     transaction.replace(R.id.frameLayout, fragmentSearch).commitAllowingStateLoss();
 
