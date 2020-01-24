@@ -15,8 +15,9 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+
 public class FragmentWebView extends Fragment {
-    private WebView webView = null;
+    public WebView webView = null;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,7 +37,7 @@ public class FragmentWebView extends Fragment {
 
         webView.loadUrl("http://ulotto.didimu.co.kr");
 
-        return inflater.inflate(R.layout.fragment_webview, container, false);
+        return view;
     }
 
     private class MyWebViewClient extends WebViewClient {
@@ -44,7 +45,7 @@ public class FragmentWebView extends Fragment {
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
 
             Uri url = request.getUrl();
-            
+
             if(url.toString().indexOf("didimu.co.kr") > -1 ) {
                 return false;
             }
