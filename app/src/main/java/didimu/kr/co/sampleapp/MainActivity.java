@@ -1,5 +1,7 @@
 package didimu.kr.co.sampleapp;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -157,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener{
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -177,13 +180,18 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.callItem:
                     //transaction.replace(R.id.frameLayout, fragmentCall).addToBackStack(null).commitAllowingStateLoss();
-                    Intent intent = new Intent(MainActivity.this, Page1.class);
-                    startActivity(intent);
+                    Intent intent = new Intent((MainActivity)getApplicationContext(), Page1.class);
+                    startActivityForResult(intent, 1);
                     break;
             }
             return true;
         }
     }
+
+    private Activity activity;
+
+
+
 
 
 
