@@ -180,15 +180,15 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.callItem:
                     //transaction.replace(R.id.frameLayout, fragmentCall).addToBackStack(null).commitAllowingStateLoss();
-                    Intent intent = new Intent((MainActivity)getApplicationContext(), Page1.class);
-                    startActivityForResult(intent, 1);
+                    Intent intent = new Intent((MainActivity)getActivity(), Page1.class);
+                    startActivity(intent);
                     break;
             }
             return true;
         }
     }
 
-    private Activity activity;
+
 
 
 
